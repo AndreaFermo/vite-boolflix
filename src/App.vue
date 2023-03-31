@@ -1,10 +1,16 @@
-<template></template>
+<template>
+  <MyHeader @doSearch="getMovies" />
+</template>
 
 <script>
 import axios from 'axios';
 import { store } from './store.js';
+import MyHeader from './components/MyHeader.vue';
 
 export default {
+  components: {
+    MyHeader
+  },
   data() {
     return {
       store
@@ -12,16 +18,16 @@ export default {
   },
   methods: {
     getMovies() {
-      let urlApi = 'https://api.themoviedb.org/3/search/movie?api_key=0ef6507b5d63cfd376dbac3c0f9236f2&query=ritorno+al+futuro&language=it';
-      axios.get(urlApi).then(response => {
-        this.store.moviesList = response.data;
+      if (this.store.search.length > 0) {
+        let urlApi = `https://api.themoviedb.org/3/search/movie?api_key=0ef6507b5d63cfd376dbac3c0f9236f2&query=${this.store.search}&language=it`;
+        axios.get(urlApi).then(response => {
+          this.store.moviesList = response.data.results;
+        }
+        )
       }
-      )
+
     }
   },
-  created() {
-    this.getMovies();
-  }
 
 }
 </script>
