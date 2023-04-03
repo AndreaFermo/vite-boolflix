@@ -1,5 +1,5 @@
 <template>
-    <input type="text" v-model="store.search">
+    <input type="text" v-model="store.search" @keyup.enter="$emit('doSearch')">
     <button @click="$emit('doSearch')">Cerca</button>
 </template>
 
