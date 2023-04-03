@@ -1,21 +1,23 @@
 <template>
-    <ul v-for="(element, index) in store.moviesList" :key="index">
-        <li>{{ element.title }}</li>
-        <li>{{ element.original_title }}</li>
-        <li>{{ element.original_language }}</li>
-        <li>{{ element.vote_average }}</li>
+    <h2>Film</h2>
+    <ul>
+        <MyCard v-for="(movie, index) in store.moviesList" :key="index" :movie="movie" />
     </ul>
 </template>
 <script>
 import { store } from '../store';
+import MyCard from './MyCard.vue';
 export default {
     name: 'MyMovieList',
+    components: {
+        MyCard
+    },
     data() {
         return {
             store
         }
-    }
 
+    }
 
 }
 </script>
