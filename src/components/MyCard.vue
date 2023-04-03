@@ -3,7 +3,7 @@
         <h5>{{ movie.title }}</h5>
         <h5 v-if="movie.original_title">{{ movie.original_title }}</h5>
         <h5 v-else>{{ movie.original_name }}</h5>
-        <img :src="getFlag(movie.original_language)" alt="">
+        <img :src="getFlag(movie.original_language)" :alt="movie.original_language">
         <h5> {{ movie.vote_average }}</h5>
 
     </li>
