@@ -1,5 +1,6 @@
 <template>
     <li>
+        <img :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" :alt="`poster ${movie.title}`">
         <h5>{{ movie.title }}</h5>
         <h5 v-if="movie.original_title">{{ movie.original_title }}</h5>
         <h5 v-else>{{ movie.original_name }}</h5>

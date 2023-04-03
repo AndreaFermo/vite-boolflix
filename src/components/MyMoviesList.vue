@@ -8,6 +8,7 @@
         <MyCard v-for="(movie, index) in store.tvList" :key="index" :movie="movie" />
     </ul>
 </template>
+
 <script>
 import { store } from '../store';
 import MyCard from './MyCard.vue';
@@ -25,4 +26,5 @@ export default {
 
 }
 </script>
+
 <style></style>
