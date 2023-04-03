@@ -3,6 +3,10 @@
     <ul>
         <MyCard v-for="(movie, index) in store.moviesList" :key="index" :movie="movie" />
     </ul>
+    <h2>Serie Tv</h2>
+    <ul>
+        <MyCard v-for="(movie, index) in store.tvList" :key="index" :movie="movie" />
+    </ul>
 </template>
 <script>
 import { store } from '../store';
