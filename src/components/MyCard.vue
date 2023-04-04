@@ -1,25 +1,28 @@
 <template>
-    <div class="card-coontainer">
-        <div class="poster-container">
-            <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`"
-                :alt="`poster ${movie.title}`" class="poster">
-            <img v-else src="https://www.prolococisanobg.it/wp-content/uploads/2017/10/Non-disponibile-_04.jpg"
-                :alt="`poster ${movie.title}`" class="poster">
-        </div>
-        <div>
-            <h5>Titolo: {{ movie.title }}</h5>
-            <h5 v-if="movie.original_title">{{ movie.original_title }}</h5>
-            <h5 v-else>Titolo Originale:{{ movie.original_name }}</h5>
-            <img v-if="languageWhiteList.includes(movie.original_language)" :src="getFlag(movie.original_language)"
-                :alt="movie.original_language" class="flag">
-            <h5 v-else>{{ movie.original_language }}</h5>
-            <h5>
-                <span>Voto: </span>
-                <i v-for="(star, index) in createStarsRate(movie.vote_average)" class="fa-solid fa-star" :key="index"></i>
-                <i v-for="(star, index) in 5 - createStarsRate(movie.vote_average)" class="fa-regular fa-star"
-                    :key="index"></i>
-            </h5>
-            <h5> Overvew: {{ movie.overview }} </h5>
+    <div class="flip-card-container">
+        <div class="card-coontainer">
+            <div class="poster-container">
+                <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`"
+                    :alt="`poster ${movie.title}`" class="poster">
+                <img v-else src="https://www.prolococisanobg.it/wp-content/uploads/2017/10/Non-disponibile-_04.jpg"
+                    alt="poster not available" class="poster">
+            </div>
+            <div class="info-container">
+                <h5>Titolo: {{ movie.title ? movie.title : movie.name }}</h5>
+                <h5>Titolo Originale: {{ movie.original_title ? movie.original_title : movie.original_name }}</h5>
+
+                <img v-if="languageWhiteList.includes(movie.original_language)" :src="getFlag(movie.original_language)"
+                    :alt="movie.original_language" class="flag">
+                <h5 v-else>{{ movie.original_language }}</h5>
+                <h5>
+                    <span>Voto: </span>
+                    <i v-for="(star, index) in createStarsRate(movie.vote_average)" class="fa-solid fa-star"
+                        :key="index"></i>
+                    <i v-for="(star, index) in 5 - createStarsRate(movie.vote_average)" class="fa-regular fa-star"
+                        :key="index"></i>
+                </h5>
+                <h5 class="overvew"> Overvew: {{ movie.overview }} </h5>
+            </div>
         </div>
     </div>
 </template>
@@ -60,14 +63,47 @@ export default {
     overflow: hidden;
     display: flex;
     justify-content: center;
+
+    .poster {
+        height: 100%;
+
+    }
 }
 
-.poster {
-    height: 100%;
+.info-container {
+    width: 100%;
+    height: 400px;
+    overflow-y: scroll;
+    background-color: black;
+    color: white;
+
+    .flag {
+        display: block;
+    }
 
 }
 
-.flag {
-    display: block;
+//flip card
+
+.card-coontainer {
+    position: relative;
+    width: 250px;
+    height: 400px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card-container:hover .card-coontainer {
+    transform: rotateY(180deg);
+}
+
+.poster-container,
+.info-container {
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.info-container {
+    transform: rotateY(180deg);
 }
 </style>

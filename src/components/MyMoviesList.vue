@@ -46,7 +46,6 @@ export default {
         .card {
             margin: 10px;
             max-width: calc((100% / 4) - 20px);
-
         }
     }
 
