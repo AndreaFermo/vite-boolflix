@@ -12,7 +12,9 @@
                 <p><span class="bold">Titolo Originale:</span> {{ movie.original_title ? movie.original_title :
                     movie.original_name }}
                 </p>
-
+                <p><span class="bold">Cast: </span><span v-for="(element, index) in cast.splice(0, 5)" :key="index">"{{
+                    element.name }}"
+                    </span></p>
                 <img v-if="languageWhiteList.includes(movie.original_language)" :src="getFlag(movie.original_language)"
                     :alt="movie.original_language" class="flag">
                 <p v-else>{{ movie.original_language }}</p>
@@ -29,6 +31,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
     name: 'MyCard',
     props: {
@@ -36,7 +39,9 @@ export default {
     },
     data() {
         return {
-            languageWhiteList: ['it', 'fr', 'de', 'en']
+            languageWhiteList: ['it', 'fr', 'de', 'en'],
+            cast: [],
+
         }
     },
     methods: {
@@ -52,8 +57,29 @@ export default {
         createStarsRate(n) {
             return Math.ceil(n / 2);
 
-        }
+        },
+        getCast(id) {
+            let urlCastApi = '';
+            if (this.movie.original_title) {
+                urlCastApi = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=0ef6507b5d63cfd376dbac3c0f9236f2`;
+            } else {
+                urlCastApi = `https://api.themoviedb.org/3/tv/${id}/credits?api_key=0ef6507b5d63cfd376dbac3c0f9236f2`;
+            }
+
+            axios.get(urlCastApi).then(response => {
+                this.cast = response.data.cast;
+            });
+        },
+
+
+    },
+    mounted() {
+        this.getCast(this.movie.id);
     }
+
+
+
+
 }
 
 
