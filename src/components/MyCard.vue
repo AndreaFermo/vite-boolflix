@@ -8,20 +8,22 @@
                     alt="poster not available" class="poster">
             </div>
             <div class="info-container">
-                <h5>Titolo: {{ movie.title ? movie.title : movie.name }}</h5>
-                <h5>Titolo Originale: {{ movie.original_title ? movie.original_title : movie.original_name }}</h5>
+                <p><span class="bold">Titolo:</span> {{ movie.title ? movie.title : movie.name }}</p>
+                <p><span class="bold">Titolo Originale:</span> {{ movie.original_title ? movie.original_title :
+                    movie.original_name }}
+                </p>
 
                 <img v-if="languageWhiteList.includes(movie.original_language)" :src="getFlag(movie.original_language)"
                     :alt="movie.original_language" class="flag">
-                <h5 v-else>{{ movie.original_language }}</h5>
-                <h5>
-                    <span>Voto: </span>
+                <p v-else>{{ movie.original_language }}</p>
+                <p>
+                    <span class="bold"><span>Voto:</span> </span>
                     <i v-for="(star, index) in createStarsRate(movie.vote_average)" class="fa-solid fa-star"
                         :key="index"></i>
                     <i v-for="(star, index) in 5 - createStarsRate(movie.vote_average)" class="fa-regular fa-star"
                         :key="index"></i>
-                </h5>
-                <h5 class="overvew"> Overvew: {{ movie.overview }} </h5>
+                </p>
+                <p class="overvew"><span class="bold">Overvew:</span> {{ movie.overview }} </p>
             </div>
         </div>
     </div>
@@ -66,7 +68,6 @@ export default {
 
     .poster {
         height: 100%;
-
     }
 }
 
@@ -79,6 +80,14 @@ export default {
 
     .flag {
         display: block;
+    }
+
+    p {
+        padding: 10px 5px;
+    }
+
+    .bold {
+        font-weight: bold;
     }
 
 }

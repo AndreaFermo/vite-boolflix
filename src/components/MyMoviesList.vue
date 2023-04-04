@@ -53,6 +53,7 @@ export default {
     h2 {
         font-size: 40px;
         text-align: center;
+        margin: 10px 0px;
     }
 }
 </style>
