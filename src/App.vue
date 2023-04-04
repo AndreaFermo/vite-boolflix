@@ -44,20 +44,21 @@ export default {
         this.store.movieGenres = response.data.genres;
       });
       axios.get(tvGenreApi).then(response => {
+        let support = [];
         this.store.tvGenres = response.data.genres;
+        this.store.genres = [...this.store.movieGenres];
+        this.store.genres.forEach(element => {
+          support.push(element.id);
+        });
+        this.store.tvGenres.forEach(element => {
+          if (!support.includes(element.id)) {
+            this.store.genres.push(element);
+          }
+        });
       });
-      this.store.genres = this.store.movieGenres;
-      this.store.tvGenres.forEach(element => {
-        if (!this.store.genres.includes(element)) {
-          this.store.genres.push(element);
-        }
-      });
-
-
     },
-
   },
-  created() {
+  mounted() {
     this.getGenre();
   },
 }

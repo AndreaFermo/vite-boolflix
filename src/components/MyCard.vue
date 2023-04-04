@@ -15,6 +15,9 @@
                 <p><span class="bold">Cast: </span><span v-for="(element, index) in cast.splice(0, 5)" :key="index">"{{
                     element.name }}"
                     </span></p>
+                <ol>
+                    <li v-for="genre in movie.genre_ids">{{ genre }}</li>
+                </ol>
                 <img v-if="languageWhiteList.includes(movie.original_language)" :src="getFlag(movie.original_language)"
                     :alt="movie.original_language" class="flag">
                 <p v-else>{{ movie.original_language }}</p>
@@ -35,12 +38,15 @@ import axios from 'axios';
 export default {
     name: 'MyCard',
     props: {
-        movie: Object
+        movie: Object,
+        genresList: Array
+
     },
     data() {
         return {
             languageWhiteList: ['it', 'fr', 'de', 'en'],
             cast: [],
+            genresScoped: []
 
         }
     },
@@ -72,9 +78,11 @@ export default {
         },
 
 
+
     },
     mounted() {
         this.getCast(this.movie.id);
+
     }
 
 
@@ -84,7 +92,7 @@ export default {
 
 
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .poster-container {
     width: 100%;
     height: 400px;

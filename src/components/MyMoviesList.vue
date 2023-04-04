@@ -3,7 +3,7 @@
         <h2 v-if="store.moviesList.length > 0">Film</h2>
         <div class="card-container">
             <div v-for="(movie, index) in store.moviesList" :key="index" class="card">
-                <MyCard :movie="movie" />
+                <MyCard :movie="movie" :genresList="store.genres" />
             </div>
         </div>
         <h2 v-if="store.tvList.length > 0">Serie Tv</h2>
@@ -49,7 +49,6 @@ export default {
             max-width: calc((100% / 4) - 20px);
         }
     }
-
 
     h2 {
         font-size: 40px;
