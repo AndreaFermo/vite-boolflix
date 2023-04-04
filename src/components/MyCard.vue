@@ -77,13 +77,19 @@ export default {
     overflow-y: scroll;
     background-color: black;
     color: white;
+    padding: 10px;
 
     .flag {
         display: block;
     }
 
+    i {
+        color: yellow;
+        margin: 0px 3px;
+    }
+
     p {
-        padding: 10px 5px;
+        padding: 10px 0px;
     }
 
     .bold {

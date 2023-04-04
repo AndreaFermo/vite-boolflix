@@ -1,6 +1,8 @@
 <template>
   <MyHeader @doSearch="getMovies()" />
-  <MyMoviesList />
+  <main>
+    <MyMoviesList />
+  </main>
 </template>
 
 <script>
@@ -45,4 +47,8 @@ export default {
 
 <style lang="scss">
 @use './styles/general.scss' as *;
+
+main {
+  height: clac(100vh- 100px);
+}
 </style>
