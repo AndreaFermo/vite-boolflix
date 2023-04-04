@@ -9,7 +9,7 @@
         <h2 v-if="store.tvList.length > 0">Serie Tv</h2>
         <div class="card-container">
             <div v-for="(movie, index) in store.tvList" :key="index" class="card">
-                <MyCard :movie="movie" />
+                <MyCard :movie="movie" :genresList="store.genres" />
             </div>
         </div>
     </div>

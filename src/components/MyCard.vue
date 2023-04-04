@@ -16,7 +16,7 @@
                     element.name }}"
                     </span></p>
                 <ol>
-                    <li v-for="genre in movie.genre_ids">{{ genre }}</li>
+                    <li v-for="genre in movie.genre_ids">{{ genreConvert(genre) }}</li>
                 </ol>
                 <img v-if="languageWhiteList.includes(movie.original_language)" :src="getFlag(movie.original_language)"
                     :alt="movie.original_language" class="flag">
@@ -76,6 +76,16 @@ export default {
                 this.cast = response.data.cast;
             });
         },
+        genreConvert(myId) {
+            let id = '';
+            this.genresList.forEach(element => {
+                if (element.id == myId) {
+                    id = element.name;
+                }
+
+            });
+            return id;
+        }
 
 
 
@@ -128,6 +138,10 @@ export default {
 
     .bold {
         font-weight: bold;
+    }
+
+    ol {
+        padding-left: 15px;
     }
 
 }
