@@ -23,6 +23,7 @@ export default {
   },
   methods: {
     getMovies() {
+      this.store.chosenGenre = '';
       if (this.store.search.length > 0) {
         this.store.moviesList = [];
         this.store.tvList = [];

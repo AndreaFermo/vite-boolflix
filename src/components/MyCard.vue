@@ -15,6 +15,7 @@
                 <p><span class="bold">Cast: </span><span v-for="(element, index) in cast.splice(0, 5)" :key="index">"{{
                     element.name }}"
                     </span></p>
+                <p class="bold">Generi:</p>
                 <ol>
                     <li v-for="genre in movie.genre_ids">{{ genreConvert(genre) }}</li>
                 </ol>
@@ -47,7 +48,6 @@ export default {
             languageWhiteList: ['it', 'fr', 'de', 'en'],
             cast: [],
             genresScoped: []
-
         }
     },
     methods: {
@@ -86,18 +86,11 @@ export default {
             });
             return id;
         }
-
-
-
     },
     mounted() {
         this.getCast(this.movie.id);
 
     }
-
-
-
-
 }
 
 
